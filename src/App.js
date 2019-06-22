@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImageManager from './components/ImageManager';
 import AnimationManager from './components/AnimationManager';
+import Game from './components/Game';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,15 +21,17 @@ class App extends Component {
     const { classes } = this.props;
     return <div>
       <CssBaseline />
-      <AppBar position="static" >
+      {/* <AppBar position="static" >
         <Toolbar>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             後臺
           </Typography>
         </Toolbar>
-      </AppBar>
-      {/* <ImageManager /> */}
+      </AppBar> */}
+      <Game />
+      <ImageManager />
       <AnimationManager />
+
     </div>
   }
 }

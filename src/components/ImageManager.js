@@ -106,8 +106,8 @@ class ImageManager extends Component {
         </DialogTitle>
         <DialogContent>
           <ImageEditor
-            imgInfo={imageList[editing]}
             onClose={handleImageEditClose}
+            image={imageList[editing]}
           />
         </DialogContent>
       </Dialog>

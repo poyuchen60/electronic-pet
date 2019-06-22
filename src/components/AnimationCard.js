@@ -14,13 +14,13 @@ const styles = ({
       position: 'absolute',
       top: 0,
       left: 0,
-      display: 'none'
+      opacity: 0
     },
     '& img:first-child': {
       position: 'static',
     },
     '& .shown': {
-      display: 'block'
+      opacity: 1
     }
   }
 })
@@ -46,17 +46,20 @@ class AnimationCard extends Component {
       .then( this.setState({ready: true}, this.animate));
   }
 
+  componentWillUnmount = () => this.timer && clearInterval(this.timer);
+
   animate = () => {
-    const { frames } = this.props;
     this.timer && clearInterval(this.timer);
     this.timer = setInterval(() => {
       const { currentFrame } = this.state;
-      this.setState({ currentFrame: (currentFrame + 1) % frames.length });
+      const { frames } = this.props;
+      frames.length > 0
+        && this.setState({ currentFrame: (currentFrame + 1) % frames.length });
     }, 125);
   }
 
   render() {
-    const { classes, name, description, images, frames, onEdit } = this.props;
+    const { classes, name, description, images, frames, onEdit, updating } = this.props;
     const { currentFrame } = this.state;
     return <div className={classes.constainer} ref={this.constainer}>
       <Typography variant="h5" color="inherit" noWrap>
@@ -78,6 +81,7 @@ class AnimationCard extends Component {
         )
       }
       </div>
+      { updating && <p>Updating....</p> }
     </div>
   }
 }
